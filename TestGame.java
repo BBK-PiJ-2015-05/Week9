@@ -16,19 +16,34 @@ public class TestGame{
 		testGame = new GameOfLife();
 	}
 	
+	
 	@Test
-	public void testsGetNextStateLIVE(){
-		assertEquals(State.LIVE, testGame.getNextState(State.LIVE, 2));
-		assertEquals(State.LIVE, testGame.getNextState(State.DEAD, 3));
-		
+	public void testsGetNextStateZeroNeighbours(){
+		assertEquals(State.DEAD, testGame.getNextState(State.LIVE, 0));
+		assertEquals(State.DEAD, testGame.getNextState(State.DEAD, 0));
 	}
 	
 	@Test
-	public void testsGetNextStateDEAD(){
-		assertEquals(State.DEAD, testGame.getNextState(State.LIVE, 0));
-		assertEquals(State.DEAD, testGame.getNextState(State.LIVE, 4));
-		assertEquals(State.DEAD, testGame.getNextState(State.DEAD, 2));
-		assertEquals(State.DEAD, testGame.getNextState(State.DEAD, 8));
+	public void testsGetNextStateOneNeighbours(){
+		assertEquals(State.DEAD, testGame.getNextState(State.LIVE, 1));
+		assertEquals(State.DEAD, testGame.getNextState(State.DEAD, 1));
+	}
+	
+	@Test
+	public void testsGetNextStateBetweenFourAndEightNeighbours(){
+		for(int i = 4; i < 9; i++){
+			assertEquals(State.DEAD, testGame.getNextState(State.LIVE, i));
+		}
 	}
 
+	@Test
+	public void testsGetNextStateIfDeadAndTwoNeighbours(){
+		assertEquals(State.DEAD, testGame.getNextState(State.DEAD, 2));
+	}
+	
+	@Test
+	public void testsGetNextStateThreeNeighboursAlive(){
+		assertEquals(State.LIVE, testGame.getNextState(State.LIVE, 3));
+		assertEquals(State.LIVE, testGame.getNextState(State.DEAD, 3));
+	}
 }
