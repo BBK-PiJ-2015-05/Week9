@@ -1,6 +1,6 @@
 /**
 * Week 9, day 18
-* TextLoop
+* 1. Text Loops
 * Sarah Connor
 */
 
