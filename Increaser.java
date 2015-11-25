@@ -11,6 +11,8 @@
 
 public class Increaser implements Runnable {
 	private Counter c;
+	private final static int LIMIT = 100;
+	private final static int MAX = 1000;
 	
 	public Increaser(Counter counter) {
 		this.c = counter;
@@ -18,7 +20,7 @@ public class Increaser implements Runnable {
 	
 	public static void main(String args[]) {
 		Counter counter = new Counter();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < LIMIT; i++) {
 			Increaser increaserTask = new Increaser(counter);
 			Thread t = new Thread(increaserTask);
 			t.start();
@@ -28,7 +30,7 @@ public class Increaser implements Runnable {
 	public void run() {
 		synchronized(c){
 			System.out.println("Starting at " + c.getCount());
-			for (int i = 0; i < 1000; i++) {
+			for (int i = 0; i < MAX; i++) {
 				c.increase();
 			}
 			System.out.println("Stopping at " + c.getCount());
